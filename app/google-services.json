@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "372929979618",
-    "firebase_url": "https://qaapp-de72f.firebaseio.com",
-    "project_id": "qaapp-de72f",
-    "storage_bucket": "qaapp-de72f.appspot.com"
+    "project_number": "358932058189",
+    "firebase_url": "https://qaapp-cd857.firebaseio.com",
+    "project_id": "qaapp-cd857",
+    "storage_bucket": "qaapp-cd857.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:372929979618:android:5b7857b23e2d6319",
+        "mobilesdk_app_id": "1:358932058189:android:5b7857b23e2d6319",
         "android_client_info": {
           "package_name": "jp.techacademy.takafumi.shimizu.qa_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "372929979618-arp8eita97lbjds03udavc6gn35g3j10.apps.googleusercontent.com",
+          "client_id": "358932058189-s78gqb9e0jvblr4hre9usvk1occhnqoo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jp.techacademy.takafumi.shimizu.qa_app",
+            "certificate_hash": "5fadcb0302c6b6e617ca02da8f37fec557c9ec36"
+          }
+        },
+        {
+          "client_id": "358932058189-vm4kjcnkdpnrtq06hegf64p5i8eg08rq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDZTfPgezmib1ITH3GKYTAJ2hHIAxyt3Rs"
+          "current_key": "AIzaSyCV4TYhLUuTU6F-kOhcaGAV2rWwx_uiMI4"
         }
       ],
       "services": {
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358932058189-vm4kjcnkdpnrtq06hegf64p5i8eg08rq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

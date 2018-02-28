@@ -24,7 +24,7 @@ public class Answer implements Serializable {
         return mName;
     }
 
-    public String getUid() {
+    public String getmUid() {
         return mUid;
     }
 

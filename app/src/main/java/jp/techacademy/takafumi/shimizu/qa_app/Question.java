@@ -8,6 +8,7 @@ public class Question implements Serializable {
     private String mBody;
     private String mName;
     private String mUid;
+
     private String mQuestionUid;
     private int mGenre;
     private byte[] mBitmapArray;
@@ -16,6 +17,8 @@ public class Question implements Serializable {
     public String getTitle() {
         return mTitle;
     }
+
+
 
     public String getBody() {
         return mBody;
@@ -46,6 +49,7 @@ public class Question implements Serializable {
 
     public Question(String title, String body, String name, String uid, String questionUid, int genre, byte[] bytes, ArrayList<Answer> answers) {
         mTitle = title;
+
         mBody = body;
         mName = name;
         mUid = uid;

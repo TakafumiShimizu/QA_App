@@ -6,9 +6,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,17 +32,19 @@ public class QuestionDetailActivity extends AppCompatActivity {
     private ListView mListView;
     private Question mQuestion;
     private QuestionDetailListAdapter mAdapter;
-    private ProgressDialog mProgress;
 
     private DatabaseReference mAnswerRef;
     private DatabaseReference mFavoriteRef;
+    private DatabaseReference mDatabaseReference;
+
+
+
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    private int mGenre;
     DatabaseReference dataBaseReference = FirebaseDatabase.getInstance().getReference();
 
 
-    private ChildEventListener mEventListener = new ChildEventListener() {
+    private ChildEventListener mFavoriteEventListener = new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
             HashMap map = (HashMap) dataSnapshot.getValue();
@@ -84,6 +88,9 @@ public class QuestionDetailActivity extends AppCompatActivity {
         }
     };
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,20 +101,26 @@ public class QuestionDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                DatabaseReference dataBaseReference = FirebaseDatabase.getInstance().getReference();
+
                 DatabaseReference FavoriteRef = dataBaseReference.child(Const.FavoritePATH).child(mQuestion.getUid()).child(mQuestion.getQuestionUid());
-
+                mFavoriteRef = mDatabaseReference.child(Const.FavoritePATH).child(mQuestion.getUid()).child(mQuestion.getQuestionUid());
+                mFavoriteRef.addChildEventListener(mFavoriteEventListener);
                 Map<String, String> data = new HashMap<String, String>();
-                data.put("favorite","1");
-
-                // UID
-                FavoriteRef.push().setValue(data, this);
-                mProgress.show();
 
                 if( button3.getText().toString().equals("お気に入り")){
+
+
+                data.put("favorite","1");
+                FavoriteRef.setValue(data);
+
+
                     button3.setBackgroundColor(YELLOW);
                     button3.setText("いいね！");
                 }else{
+
+                    data.put("favorite","0");
+                    FavoriteRef.removeValue();
+
                     button3.setBackgroundColor(GRAY);
                     button3.setText("お気に入り");
                 }
@@ -118,6 +131,8 @@ public class QuestionDetailActivity extends AppCompatActivity {
        button3.setEnabled(false);
         }
         ;
+
+
 
 
 
@@ -139,6 +154,11 @@ public class QuestionDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
+
+
                 // ログイン済みのユーザーを取得する
 
 
@@ -162,8 +182,9 @@ public class QuestionDetailActivity extends AppCompatActivity {
 
 
 
+
         mAnswerRef = dataBaseReference.child(Const.ContentsPATH).child(String.valueOf(mQuestion.getGenre())).child(mQuestion.getQuestionUid()).child(Const.AnswersPATH);
-        mAnswerRef.addChildEventListener(mEventListener);
+        mAnswerRef.addChildEventListener(mFavoriteEventListener);
 
     }
 }

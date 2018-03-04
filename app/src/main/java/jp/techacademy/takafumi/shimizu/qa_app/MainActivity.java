@@ -30,6 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static jp.techacademy.takafumi.shimizu.qa_app.Const.FavoritePATH;
+
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
@@ -37,12 +39,15 @@ public class MainActivity extends AppCompatActivity {
     // ログイン済みのユーザーを取得する
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+
     // --- ここから ---
     private DatabaseReference mDatabaseReference;
     private DatabaseReference mGenreRef;
+    private DatabaseReference mFavoriteRef;
     private ListView mListView;
     private ArrayList<Question> mQuestionArrayList;
     private QuestionsListAdapter mAdapter;
+    private Question mQuestion;
 
     private ChildEventListener mEventListener = new ChildEventListener() {
         @Override
@@ -105,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onChildRemoved(DataSnapshot dataSnapshot) {
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
 
         }
 
@@ -186,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);
                     }else {
+
                         mToolbar.setTitle("お気に入り");
 
 
@@ -210,8 +216,12 @@ public class MainActivity extends AppCompatActivity {
                     mGenreRef.removeEventListener(mEventListener);
                 }
 
+
+
                 mGenreRef = mDatabaseReference.child(Const.ContentsPATH).child(String.valueOf(mGenre));
                 mGenreRef.addChildEventListener(mEventListener);
+
+
                 return true;
             }
         });
@@ -221,11 +231,16 @@ public class MainActivity extends AppCompatActivity {
         // Firebase
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
+
+
         // ListViewの準備
         mListView = (ListView) findViewById(R.id.listView);
         mAdapter = new QuestionsListAdapter(this);
         mQuestionArrayList = new ArrayList<Question>();
         mAdapter.notifyDataSetChanged();
+
+
+
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

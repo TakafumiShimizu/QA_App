@@ -37,9 +37,6 @@ public class QuestionDetailActivity extends AppCompatActivity {
     private DatabaseReference mFavoriteRef;
     private DatabaseReference mDatabaseReference;
 
-
-
-
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
@@ -108,7 +105,7 @@ public class QuestionDetailActivity extends AppCompatActivity {
 
 
 
-                DatabaseReference FavoriteRef = dataBaseReference.child(Const.FavoritePATH).child(mQuestion.getUid()).child(mQuestion.getQuestionUid());
+                DatabaseReference mFavoriteRef = dataBaseReference.child(Const.FavoritePATH).child(mQuestion.getUid()).child(mQuestion.getQuestionUid());
 
                 mFavoriteRef.addChildEventListener(mFavoriteEventListener);
 
@@ -118,7 +115,7 @@ public class QuestionDetailActivity extends AppCompatActivity {
 
 
                 data.put("favorite","1");
-                FavoriteRef.setValue(data);
+                mFavoriteRef.setValue(data);
 
 
                     button3.setBackgroundColor(YELLOW);
@@ -126,7 +123,7 @@ public class QuestionDetailActivity extends AppCompatActivity {
                 }else{
 
                     data.put("favorite","0");
-                    FavoriteRef.removeValue();
+                    mFavoriteRef.removeValue();
 
                     button3.setBackgroundColor(GRAY);
                     button3.setText("お気に入り");

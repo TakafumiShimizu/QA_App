@@ -39,9 +39,9 @@ public class QuestionDetailActivity extends AppCompatActivity {
 
 
 
+
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    DatabaseReference dataBaseReference = FirebaseDatabase.getInstance().getReference();
 
 
     private ChildEventListener mFavoriteEventListener = new ChildEventListener() {
@@ -96,15 +96,22 @@ public class QuestionDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_detail);
 
+        DatabaseReference dataBaseReference = FirebaseDatabase.getInstance().getReference();
+
+
         final Button button3 = (Button) findViewById(R.id.button3);
         button3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
 
+                DatabaseReference dataBaseReference = FirebaseDatabase.getInstance().getReference();
+
+
 
                 DatabaseReference FavoriteRef = dataBaseReference.child(Const.FavoritePATH).child(mQuestion.getUid()).child(mQuestion.getQuestionUid());
-                mFavoriteRef = mDatabaseReference.child(Const.FavoritePATH).child(mQuestion.getUid()).child(mQuestion.getQuestionUid());
+
                 mFavoriteRef.addChildEventListener(mFavoriteEventListener);
+
                 Map<String, String> data = new HashMap<String, String>();
 
                 if( button3.getText().toString().equals("お気に入り")){

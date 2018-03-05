@@ -105,9 +105,9 @@ public class QuestionDetailActivity extends AppCompatActivity {
 
 
 
-                DatabaseReference mFavoriteRef = dataBaseReference.child(Const.FavoritePATH).child(mQuestion.getUid()).child(mQuestion.getQuestionUid());
+                DatabaseReference FavoriteRef = dataBaseReference.child(Const.FavoritePATH).child(mQuestion.getUid()).child(mQuestion.getQuestionUid());
 
-                mFavoriteRef.addChildEventListener(mFavoriteEventListener);
+                FavoriteRef.addChildEventListener(mFavoriteEventListener);
 
                 Map<String, String> data = new HashMap<String, String>();
 
@@ -115,7 +115,7 @@ public class QuestionDetailActivity extends AppCompatActivity {
 
 
                 data.put("favorite","1");
-                mFavoriteRef.setValue(data);
+                FavoriteRef.setValue(data);
 
 
                     button3.setBackgroundColor(YELLOW);
@@ -123,7 +123,7 @@ public class QuestionDetailActivity extends AppCompatActivity {
                 }else{
 
                     data.put("favorite","0");
-                    mFavoriteRef.removeValue();
+                    FavoriteRef.removeValue();
 
                     button3.setBackgroundColor(GRAY);
                     button3.setText("お気に入り");
